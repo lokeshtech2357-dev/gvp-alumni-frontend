@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Disable animations when the `no-motion` class is set on the document element. */
+.no-motion *, .no-motion *::before, .no-motion *::after {
+	animation: none !important;
+	transition: none !important;
+	scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0s !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* A slow, low-contrast sheen gives the footer depth without distracting from its content. */
+.gvp-footer {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(99, 102, 241, 0.22), transparent 42%),
+    radial-gradient(ellipse at 88% 100%, rgba(168, 85, 247, 0.16), transparent 38%),
+    linear-gradient(135deg, #090d27 0%, #11163a 52%, #0b102c 100%);
+}
+
+.gvp-footer::before {
+  position: absolute;
+  z-index: 0;
+  top: -55%;
+  bottom: -55%;
+  left: -45%;
+  width: 28%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.015) 32%,
+    rgba(196, 181, 253, 0.1) 50%,
+    rgba(255, 255, 255, 0.025) 68%,
+    transparent 100%
+  );
+  content: "";
+  pointer-events: none;
+  transform: skewX(-22deg) translateX(0);
+  animation: footerReflection 16s ease-in-out infinite;
+}
+
+@keyframes footerReflection {
+  0%, 15% {
+    transform: skewX(-22deg) translateX(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0.7;
+  }
+  85%, 100% {
+    transform: skewX(-22deg) translateX(600%);
+    opacity: 0;
+  }
+}
+
+/* Make interactive elements feel snappier */
+button, a, input[type="button"], input[type="submit"], .btn {
+  transition-property: transform, opacity, background-color, box-shadow;
+  transition-duration: 120ms !important;
+  transition-timing-function: cubic-bezier(.2,.8,.2,1) !important;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Reduce card hover translate distance and pause animation impact on click */
+.rounded-xl:hover {
+  transform: translateY(-4px) !important;
+}
+
+/* ── News Ticker ── */
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-scroll {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: tickerScroll 35s linear infinite;
+  will-change: transform;
+}
+
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+.ticker-wrapper {
+  overflow: hidden;
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* ── Event Card Highlight Animation ── */
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(99, 102, 241, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(99, 102, 241, 0);
+  }
+}
+
+.highlight {
+  animation: highlightPulse 2s ease-out;
+}
