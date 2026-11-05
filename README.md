@@ -12,4 +12,4 @@ Standalone Next.js 15.5.29 frontend for the GVP Alumni website.
 
 Image and video uploads request a short-lived signature from the authenticated backend and send the media directly to Cloudinary. Configure the Cloudinary credentials on the backend, never in this frontend.
 
-New alumni accounts can sign up without prior record verification. After signup they are signed in and sent directly to the alumni profile form to provide their details.
+New alumni accounts can sign up without prior record verification. After signup, users sign in with their new credentials and are sent to the alumni platform dashboard. They can provide self-reported details on the profile page.

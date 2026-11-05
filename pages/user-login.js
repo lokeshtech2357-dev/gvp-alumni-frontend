@@ -4,12 +4,7 @@ import { useRouter } from 'next/router';
 import UserAuthLayout from '../components/UserAuthLayout';
 import GoogleSignInButton from '../components/GoogleSignInButton';
 import { useAuth } from '../context/AuthContext';
-import {
-  getMyAlumniRecord,
-  getStoredAuthToken,
-  loginUser,
-  loginUserWithGoogle,
-} from '../services/api';
+import { loginUser, loginUserWithGoogle } from '../services/api';
 
 export default function UserLogin() {
   const [email, setEmail] = useState('');
@@ -20,29 +15,7 @@ export default function UserLogin() {
   const { user, isLoading, signIn } = useAuth();
 
   useEffect(() => {
-    if (isLoading || !user) return undefined;
-
-    let isCurrent = true;
-    const redirectUser = async () => {
-      let destination = '/user-dashboard';
-      if (user.role === 'alumni') {
-        try {
-          const token = getStoredAuthToken();
-          const { data } = await getMyAlumniRecord(token);
-          destination = data.profile ? '/user-dashboard' : '/alumni-profile';
-        } catch (error) {
-          console.error('Unable to check alumni profile completion:', error);
-          destination = '/alumni-profile';
-        }
-      }
-
-      if (isCurrent) await router.replace(destination);
-    };
-
-    redirectUser();
-    return () => {
-      isCurrent = false;
-    };
+    if (!isLoading && user) router.replace('/user-dashboard');
   }, [isLoading, router, user]);
 
   const handleSubmit = async (event) => {
@@ -52,6 +25,7 @@ export default function UserLogin() {
     try {
       const { data } = await loginUser({ email, password });
       signIn(data);
+      await router.replace('/user-dashboard');
     } catch (requestError) {
       setError(requestError.response?.data?.message || 'Could not connect to the server. Please try again.');
     } finally {
@@ -65,6 +39,7 @@ export default function UserLogin() {
     try {
       const { data } = await loginUserWithGoogle(credential);
       signIn(data);
+      await router.replace('/user-dashboard');
     } catch (requestError) {
       setError(requestError.response?.data?.message || 'Could not connect to the server. Please try again.');
     } finally {
@@ -87,6 +62,11 @@ export default function UserLogin() {
       }
     >
       {error && <div role="alert" className="mt-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</div>}
+      {router.isReady && router.query.registered === '1' && (
+        <div role="status" className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+          Your account has been created. Sign in to continue to the alumni platform.
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="mt-5 space-y-4">
         <label className="block text-sm font-semibold text-slate-700">
           Email address

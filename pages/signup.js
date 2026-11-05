@@ -15,11 +15,11 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const { user, isLoading, signIn } = useAuth();
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.replace(user.role === 'alumni' ? '/alumni-profile' : '/');
+      router.replace('/user-dashboard');
     }
   }, [isLoading, router, user]);
 
@@ -34,12 +34,8 @@ export default function Signup() {
 
     setIsSubmitting(true);
     try {
-      const { data } = await registerUser({ name, email, password, confirmPassword });
-      if (!data.token || !data.user) {
-        throw new Error('The registration response did not contain an authenticated user.');
-      }
-      signIn(data);
-      await router.replace('/alumni-profile');
+      await registerUser({ name, email, password, confirmPassword });
+      await router.replace('/user-login?registered=1');
     } catch (requestError) {
       setError(requestError.response?.data?.message || requestError.message || 'Could not connect to the server. Please try again.');
     } finally {
@@ -58,7 +54,6 @@ export default function Signup() {
           {error}
         </div>
       )}
-
       <form onSubmit={handleSubmit} className="mt-5 space-y-4">
         <label className="block text-sm font-semibold text-slate-700">
           Full Name
@@ -116,7 +111,7 @@ export default function Signup() {
         </label>
         <button
           type="submit"
-          disabled={isSubmitting || isLoading || Boolean(user) || Boolean(success)}
+          disabled={isSubmitting || isLoading || Boolean(user)}
           className="w-full rounded-xl bg-[#4c111b] px-5 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-[#731d2b] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? 'Creating account…' : 'Create Account'}
