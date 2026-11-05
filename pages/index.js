@@ -38,7 +38,7 @@ export default function Home() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-purple-50 overflow-x-hidden">
+    <div className="min-h-screen w-full min-w-0 bg-gradient-to-br from-cyan-50 via-white to-purple-50">
       <style jsx>{`
         @keyframes fadeIn {
           from {
@@ -73,7 +73,7 @@ export default function Home() {
         <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
         <div className="absolute bottom-8 left-1/2 h-32 w-[70%] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-200/25 via-blue-100/25 to-indigo-200/20 blur-3xl" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           <div className="animate-fade-in">
             <div className="mx-auto max-w-6xl rounded-[2rem] bg-white/40 px-4 py-6 backdrop-blur-sm sm:px-8 lg:px-12 lg:py-10">
               <div className="space-y-6 text-center">
@@ -96,13 +96,13 @@ export default function Home() {
                 <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:justify-center">
                   <Link
                     href={['admin', 'editor', 'manager', 'super-admin'].includes(user?.role) ? '/dashboard' : '/user-dashboard'}
-                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/35 whitespace-nowrap"
+                    className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-cyan-500/35 sm:w-auto"
                   >
                     Alumni Dashboard →
                   </Link>
                   <Link
                     href="/about?section=overview"
-                    className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-50 whitespace-nowrap"
+                    className="inline-flex w-full items-center justify-center whitespace-nowrap rounded-full border border-slate-300 bg-white px-7 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-50 sm:w-auto"
                     onMouseEnter={() => prefetchAllContent().catch(() => {})}
                     onFocus={() => prefetchAllContent().catch(() => {})}
                   >
@@ -140,24 +140,24 @@ export default function Home() {
       </div>
 
       {/* GVP Alumni Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent">#GVP Alumni</h2>
-          <h3 className="text-3xl md:text-4xl font-semibold text-slate-700 mb-6">A Network of 3 Decades Connecting 30000 Students across the Globe</h3>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+          <h2 className="text-3xl font-extrabold mb-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent sm:text-5xl md:text-6xl">#GVP Alumni</h2>
+          <h3 className="text-xl font-semibold text-slate-700 mb-6 sm:text-3xl md:text-4xl">A Network of 3 Decades Connecting 30000 Students across the Globe</h3>
+          <p className="text-base text-gray-700 max-w-4xl mx-auto leading-relaxed sm:text-xl">
             GVP alumni are changing the world. Find stories that showcase the big things happening across our community.
           </p>
         </div>
       </div>
 
       {/* President's Message Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="p-4 sm:p-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Message by Prof. Dr. Ing. P. Srinivasa Rao</h2>
-            <p className="text-lg text-blue-600 font-semibold mb-8">President, Gayatri Vidya Parishad</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 sm:text-3xl">Message by Prof. Dr. Ing. P. Srinivasa Rao</h2>
+            <p className="text-base text-blue-600 font-semibold mb-6 sm:mb-8 sm:text-lg">President, Gayatri Vidya Parishad</p>
             <div className="max-w-4xl mx-auto mb-8">
-              <p className="text-gray-700 leading-relaxed text-lg italic">
+              <p className="text-base text-gray-700 leading-relaxed italic sm:text-lg">
                 &quot;Welcome to our esteemed institution. At Gayatri Vidya Parishad, we are committed to fostering excellence in education and nurturing the next generation of leaders. Our alumni network stands as a testament to the quality of education and values we instill in our students.&quot;
               </p>
             </div>
@@ -187,11 +187,11 @@ export default function Home() {
       </div>
 
       {/* Vice President's Message Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="p-4 sm:p-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Message by Sri D. Dakshina Murthy</h2>
-            <p className="text-lg text-green-600 font-semibold mb-8">Vice President of Gayatri Vidya Parishad</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 sm:text-3xl">Message by Sri D. Dakshina Murthy</h2>
+            <p className="text-base text-green-600 font-semibold mb-6 sm:mb-8 sm:text-lg">Vice President of Gayatri Vidya Parishad</p>
             <div className="max-w-4xl mx-auto mb-8">
               <div className="relative overflow-hidden rounded-2xl shadow-xl">
                 <div className="aspect-w-16 aspect-h-9">
@@ -216,11 +216,11 @@ export default function Home() {
       </div>
 
       {/* Secretary's Message Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="p-4 sm:p-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Message by Prof. P. Somaraju</h2>
-            <p className="text-lg text-purple-600 font-semibold mb-8">Secretary of Gayatri Vidya Parishad</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 sm:text-3xl">Message by Prof. P. Somaraju</h2>
+            <p className="text-base text-purple-600 font-semibold mb-6 sm:mb-8 sm:text-lg">Secretary of Gayatri Vidya Parishad</p>
             <div className="max-w-4xl mx-auto mb-8">
               <div className="relative overflow-hidden rounded-2xl shadow-xl">
                 <div className="aspect-w-16 aspect-h-9">
@@ -245,8 +245,8 @@ export default function Home() {
       </div>
 
       {/* GVPCOE (Autonomous) Overview Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="p-8 bg-white/70 rounded-3xl border border-slate-100 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="rounded-3xl border border-slate-100 bg-white/70 p-4 shadow-sm sm:p-8">
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">GVPCOE (Autonomous)</h2>
             <p className="text-base text-orange-600 font-semibold mb-4">Gayatri Vidya Parishad</p>
@@ -260,13 +260,13 @@ export default function Home() {
       </div>
 
       {/* GVP Institute of Healthcare and Medical Technology Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="p-4 sm:p-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">GVP Institute of Healthcare and Medical Technology</h2>
-            <p className="text-lg text-teal-600 font-semibold mb-8">Healthcare Education Excellence</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 sm:text-3xl">GVP Institute of Healthcare and Medical Technology</h2>
+            <p className="text-base text-teal-600 font-semibold mb-6 sm:mb-8 sm:text-lg">Healthcare Education Excellence</p>
             <div className="max-w-4xl mx-auto mb-8">
-              <p className="text-gray-700 leading-relaxed text-lg italic">
+              <p className="text-base text-gray-700 leading-relaxed italic sm:text-lg">
                 &quot;GVP Institute of Healthcare and Medical Technology is dedicated to providing world-class education in healthcare and medical sciences. We prepare healthcare professionals with cutting-edge knowledge and practical skills to serve the community with compassion and excellence.&quot;
               </p>
             </div>
@@ -296,13 +296,13 @@ export default function Home() {
       </div>
 
       {/* GVPCOE for Women (Autonomous) Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="p-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="p-4 sm:p-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">GVPCOE for Women (Autonomous)</h2>
-            <p className="text-lg text-pink-600 font-semibold mb-8">Empowering Women in Engineering</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 sm:text-3xl">GVPCOE for Women (Autonomous)</h2>
+            <p className="text-base text-pink-600 font-semibold mb-6 sm:mb-8 sm:text-lg">Empowering Women in Engineering</p>
             <div className="max-w-4xl mx-auto mb-8">
-              <p className="text-gray-700 leading-relaxed text-lg italic">
+              <p className="text-base text-gray-700 leading-relaxed italic sm:text-lg">
                 &quot;GVPCOE for Women (Autonomous) is committed to empowering women in engineering and technology. We provide a supportive environment that fosters innovation, leadership, and excellence in technical education for women.&quot;
               </p>
             </div>

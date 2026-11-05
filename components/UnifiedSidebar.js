@@ -146,7 +146,7 @@ export default function UnifiedSidebar({ isOpen, onClose }) {
               </Link>
 
               {/* 2. My Alumni Profile */}
-              <Link
+              {user?.role === 'alumni' && <Link
                 href="/alumni-profile"
                 onClick={onClose}
                 className={navItemClass(isCurrent('/alumni-profile'))}
@@ -160,7 +160,7 @@ export default function UnifiedSidebar({ isOpen, onClose }) {
                   <span>My Alumni Profile</span>
                 </div>
                 {isCurrent('/alumni-profile') && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />}
-              </Link>
+              </Link>}
 
               {/* 3. Career Opportunities */}
               <Link
@@ -501,4 +501,3 @@ export default function UnifiedSidebar({ isOpen, onClose }) {
     </>
   );
 }
-

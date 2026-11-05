@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
 
 const careerPaths = [
   {
@@ -28,6 +29,8 @@ const careerPaths = [
 ];
 
 export default function CareerOpportunities() {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -88,12 +91,12 @@ export default function CareerOpportunities() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link
+              {user?.role === 'alumni' && <Link
                 href="/alumni-profile"
                 className="rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs sm:text-sm px-5 py-3 shadow-sm transition"
               >
                 Update Career Profile
-              </Link>
+              </Link>}
               <Link
                 href="/alumni-connect"
                 className="rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm px-5 py-3 transition"
@@ -108,4 +111,3 @@ export default function CareerOpportunities() {
     </div>
   );
 }
-

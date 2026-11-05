@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
     '/login',
     '/login-selection',
     '/user-login',
+    '/signup',
     '/admin-login',
     '/forgot-password',
     '/reset-password',

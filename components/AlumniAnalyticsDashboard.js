@@ -131,7 +131,7 @@ export default function AlumniAnalyticsDashboard() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link
+            {user?.role === 'alumni' && <Link
               href="/alumni-profile"
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md hover:from-cyan-400 hover:to-blue-500 transition"
             >
@@ -139,7 +139,7 @@ export default function AlumniAnalyticsDashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
               </svg>
               My Alumni Profile
-            </Link>
+            </Link>}
             <Link
               href="/alumni-corner"
               className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white backdrop-blur-md hover:bg-white/20 transition"
@@ -628,4 +628,3 @@ export default function AlumniAnalyticsDashboard() {
     </div>
   );
 }
-

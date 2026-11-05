@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function UserAuthLayout({ eyebrow, title, description, children }) {
+export default function UserAuthLayout({ eyebrow, title, description, titleAction, children }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#f7f4ef] px-4 py-8 sm:px-8">
       <div className="grid w-full max-w-5xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_30px_100px_rgba(47,24,20,0.16)] md:min-h-[560px] md:grid-cols-[0.82fr_1.18fr]">
@@ -21,7 +21,10 @@ export default function UserAuthLayout({ eyebrow, title, description, children }
         <section className="flex items-center justify-center px-6 py-8 sm:px-10">
           <div className="w-full max-w-md">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a4a31]">{eyebrow}</p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight text-[#281b1a]">{title}</h1>
+            <div className="mt-2 flex items-center justify-between gap-3">
+              <h1 className="text-3xl font-black tracking-tight text-[#281b1a]">{title}</h1>
+              {titleAction}
+            </div>
             <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
             {children}
           </div>

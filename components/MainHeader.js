@@ -58,15 +58,15 @@ export default function MainHeader({ onToggleSidebar }) {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#0a192f] text-white border-b border-[#1e3458] shadow-md backdrop-blur-md">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+        <div className="flex min-w-0 flex-col gap-2 py-2 md:h-20 md:flex-row md:items-center md:justify-between md:gap-4 md:py-0">
           
           {/* Left: Mobile Toggle + Official Logos & Branding */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3 md:gap-5">
             {/* Mobile / Tablet Sidebar Toggle Button */}
             <button
               type="button"
               onClick={onToggleSidebar}
-              className="lg:hidden p-2 rounded-xl bg-[#132743] hover:bg-[#1a365d] text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="shrink-0 rounded-xl bg-[#132743] p-1.5 text-cyan-400 hover:bg-[#1a365d] focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:p-2 lg:hidden"
               aria-label="Toggle navigation menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,20 +77,20 @@ export default function MainHeader({ onToggleSidebar }) {
             {/* Official College & Alumni Logos with Original Assets & Proportions */}
             <Link
               href="/"
-              className="flex items-center gap-3 sm:gap-4 group focus:outline-none"
+              className="flex min-w-0 items-center gap-2 group focus:outline-none sm:gap-3 md:gap-4"
             >
               {/* College Seal */}
               <div className="relative flex-shrink-0">
                 <img
                   src="/images/logos/gvp-college-seal.jpg"
                   alt="GVPIHLR seal"
-                  className="h-14 w-14 sm:h-16 sm:w-16 rounded-full border-2 border-[#d4af37] object-cover shadow-sm transition group-hover:scale-105"
+                  className="h-10 w-10 rounded-full border-2 border-[#d4af37] object-cover shadow-sm transition group-hover:scale-105 sm:h-12 sm:w-12 md:h-16 md:w-16"
                 />
               </div>
 
               {/* Gayatri Grads Association Logo */}
               <div className="relative flex-shrink-0">
-                <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full border-2 border-[#d4af37] bg-white p-1 flex items-center justify-center shadow-sm overflow-hidden transition group-hover:scale-105">
+                <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 border-[#d4af37] bg-white p-1 shadow-sm transition group-hover:scale-105 sm:h-12 sm:w-12 md:h-16 md:w-16">
                   <img
                     src="/images/logos/WhatsApp-Image-2023-11-20-at-2.36.06-PM.webp"
                     alt="Gayatri Grads Association"
@@ -100,17 +100,17 @@ export default function MainHeader({ onToggleSidebar }) {
               </div>
 
               {/* Title, Branding, Subtitle */}
-              <div className="flex flex-col min-w-0">
+              <div className="flex min-w-0 flex-col">
                 <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="text-[10px] sm:text-xs font-black tracking-[0.22em] text-cyan-400 uppercase">
+                  <span className="text-[9px] font-black uppercase tracking-[0.12em] text-cyan-400 sm:text-xs sm:tracking-[0.22em]">
                     GVPIHLR
                   </span>
                   <span className="h-1 w-1 rounded-full bg-[#d4af37]" />
-                  <span className="text-[10px] sm:text-[11px] font-semibold text-amber-300 truncate">
+                  <span className="truncate text-[9px] font-semibold text-amber-300 sm:text-[11px]">
                     Gayatri Vidya Parishad
                   </span>
                 </div>
-                <h1 className="text-xs sm:text-base md:text-lg font-black tracking-tight text-white leading-tight truncate">
+                <h1 className="truncate text-xs font-black leading-tight tracking-tight text-white sm:text-sm md:text-lg">
                   Gayatri Grads Association
                 </h1>
                 <p className="hidden xs:block sm:block text-[10px] sm:text-xs font-medium text-slate-300 truncate">
@@ -121,10 +121,10 @@ export default function MainHeader({ onToggleSidebar }) {
           </div>
 
           {/* Right: Notification Center + User Profile Menu / Auth Controls */}
-          <div className="flex items-center gap-2.5 sm:gap-4">
+          <div className="relative flex items-center justify-end gap-2.5 sm:gap-4">
             
             {/* Notification Icon & Dropdown */}
-            <div className="relative" ref={notifRef}>
+            <div className="static md:relative" ref={notifRef}>
               <button
                 type="button"
                 onClick={() => setShowNotifications(!showNotifications)}
@@ -149,7 +149,7 @@ export default function MainHeader({ onToggleSidebar }) {
 
               {/* Notification Popover */}
               {showNotifications && (
-                <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-[#1e3458] bg-[#0c1f3d] p-4 text-slate-200 shadow-2xl z-50 animate-fadeIn">
+                <div className="absolute right-0 z-50 mt-2 w-[calc(100vw-2.5rem)] max-w-[20rem] rounded-2xl border border-[#1e3458] bg-[#0c1f3d] p-4 text-slate-200 shadow-2xl animate-fadeIn sm:w-96">
                   <div className="flex items-center justify-between pb-3 border-b border-[#1e3458]">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">Notifications</span>
@@ -211,7 +211,7 @@ export default function MainHeader({ onToggleSidebar }) {
                 <button
                   type="button"
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="flex items-center gap-3 p-1.5 pr-3 rounded-full bg-[#132743] hover:bg-[#1a365d] border border-[#1e3458] transition focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="flex items-center gap-1.5 rounded-full border border-[#1e3458] bg-[#132743] p-1.5 pr-2 transition hover:bg-[#1a365d] focus:outline-none focus:ring-2 focus:ring-cyan-400 sm:gap-3 sm:pr-3"
                   aria-expanded={showProfileMenu}
                   aria-label="User profile menu"
                 >
@@ -238,7 +238,7 @@ export default function MainHeader({ onToggleSidebar }) {
 
                 {/* Profile Popover Menu */}
                 {showProfileMenu && (
-                  <div className="absolute right-0 mt-2 w-64 rounded-2xl border border-[#1e3458] bg-[#0c1f3d] p-3 text-slate-200 shadow-2xl z-50 animate-fadeIn">
+                  <div className="absolute right-0 z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] rounded-2xl border border-[#1e3458] bg-[#0c1f3d] p-3 text-slate-200 shadow-2xl animate-fadeIn">
                     <div className="px-3 py-2 border-b border-[#1e3458]">
                       <p className="text-sm font-bold text-white truncate">{user.name}</p>
                       <p className="text-xs text-slate-400 truncate">{user.email}</p>
@@ -259,7 +259,7 @@ export default function MainHeader({ onToggleSidebar }) {
                         Dashboard
                       </Link>
 
-                      <Link
+                      {user.role === 'alumni' && <Link
                         href="/alumni-profile"
                         onClick={() => setShowProfileMenu(false)}
                         className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-[#132743] transition"
@@ -268,7 +268,7 @@ export default function MainHeader({ onToggleSidebar }) {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         My Alumni Profile
-                      </Link>
+                      </Link>}
 
                       <Link
                         href="/settings"

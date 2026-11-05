@@ -95,6 +95,7 @@ const profileForm = (profile, email) => {
 export default function AlumniProfile() {
   const router = useRouter();
   const { user, isLoading } = useAuth();
+  const isAdmin = ['admin', 'editor', 'manager', 'super-admin'].includes(user?.role);
   const [form, setForm] = useState(initialForm());
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('');
@@ -106,7 +107,7 @@ export default function AlumniProfile() {
   useEffect(() => {
     if (isLoading) return;
     if (!user || user.role !== 'alumni') {
-      router.replace(user ? '/dashboard' : '/user-login');
+      router.replace(user ? (isAdmin ? '/dashboard' : '/user-dashboard') : '/user-login');
       return;
     }
 
@@ -125,7 +126,7 @@ export default function AlumniProfile() {
         setError(requestError.response?.data?.message || 'Unable to load your alumni profile.');
       })
       .finally(() => setIsLoadingProfile(false));
-  }, [isLoading, router, user]);
+  }, [isAdmin, isLoading, router, user]);
 
   const setField = (field, value) => setForm((current) => ({ ...current, [field]: value }));
 

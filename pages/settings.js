@@ -92,14 +92,14 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="pt-2 flex flex-wrap gap-3">
+          {user.role === 'alumni' && <div className="pt-2 flex flex-wrap gap-3">
             <Link
               href="/alumni-profile"
               className="rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 text-xs font-bold transition shadow-sm"
             >
               Edit Full Alumni Profile →
             </Link>
-          </div>
+          </div>}
         </div>
 
         {/* Notifications & Communications Preferences */}
@@ -167,4 +167,3 @@ export default function SettingsPage() {
     </div>
   );
 }
-

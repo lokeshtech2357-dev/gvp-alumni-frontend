@@ -52,6 +52,14 @@ export default function UserLogin() {
       eyebrow="Welcome to the GVP community"
       title="Sign in"
       description="Sign in to continue to the Gayatri Grads Association website."
+      titleAction={
+        <Link
+          href="/signup"
+          className="shrink-0 rounded-lg border border-[#9a4a31]/25 px-3 py-1.5 text-xs font-semibold text-[#8b3c2d] transition hover:border-[#9a4a31]/50 hover:bg-[#9a4a31]/5 hover:text-[#4c111b]"
+        >
+          Sign Up
+        </Link>
+      }
     >
       {error && <div role="alert" className="mt-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</div>}
       <form onSubmit={handleSubmit} className="mt-5 space-y-4">
