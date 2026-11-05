@@ -11,3 +11,5 @@ Standalone Next.js 15.5.29 frontend for the GVP Alumni website.
 5. Run `npm run dev`; use `npm run build` to create a production build.
 
 Image and video uploads request a short-lived signature from the authenticated backend and send the media directly to Cloudinary. Configure the Cloudinary credentials on the backend, never in this frontend.
+
+New alumni accounts can sign up without prior record verification. After signup they are signed in and sent directly to the alumni profile form to provide their details.

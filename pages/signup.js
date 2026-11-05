@@ -13,21 +13,19 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [requiresVerification, setRequiresVerification] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, signIn } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && user) router.replace('/');
+    if (!isLoading && user) {
+      router.replace(user.role === 'alumni' ? '/alumni-profile' : '/');
+    }
   }, [isLoading, router, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-    setSuccess('');
-    setRequiresVerification(false);
 
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
@@ -37,11 +35,13 @@ export default function Signup() {
     setIsSubmitting(true);
     try {
       const { data } = await registerUser({ name, email, password, confirmPassword });
-      setSuccess(data.message || 'Your account has been created. You can now sign in.');
+      if (!data.token || !data.user) {
+        throw new Error('The registration response did not contain an authenticated user.');
+      }
+      signIn(data);
+      await router.replace('/alumni-profile');
     } catch (requestError) {
-      const status = requestError.response?.status;
-      setError(requestError.response?.data?.message || 'Could not connect to the server. Please try again.');
-      setRequiresVerification(status === 403);
+      setError(requestError.response?.data?.message || requestError.message || 'Could not connect to the server. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -56,18 +56,6 @@ export default function Signup() {
       {error && (
         <div role="alert" className="mt-5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
           {error}
-          {requiresVerification && (
-            <p className="mt-2">
-              <Link href="/alumni-registration" className="font-semibold text-[#8b3c2d] underline hover:text-[#4c111b]">
-                Learn about alumni registration
-              </Link>
-            </p>
-          )}
-        </div>
-      )}
-      {success && (
-        <div role="status" className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
-          {success}
         </div>
       )}
 
